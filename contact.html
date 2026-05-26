@@ -46,8 +46,7 @@
           <strong>A note on onboarding.</strong> We work primarily with established businesses. New clients complete a brief verification step as part of our standard onboarding — typically a single document upload and a short questionnaire, completed in parallel with discovery so it does not delay kickoff.
         </div>
 
-        <!-- TODO before launch: replace Formspree form ID with the real endpoint, or swap to your own /api/contact handler. -->
-        <form action="https://formspree.io/f/REPLACE_WITH_REAL_FORM_ID" method="POST" class="contact-form">
+        <form action="/api/contact" method="POST" class="contact-form">
           <div class="form-row">
             <div class="form-field">
               <label for="fullName">Full Name<span class="req">*</span></label>

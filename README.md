@@ -13,7 +13,8 @@ index.html              Home
 about.html              About the firm + leadership (John Edward Paul)
 services.html           Six service practices, full write-ups
 process.html            Engagement methodology + onboarding / IP / security
-contact.html            Contact form (plain HTML5, posts to Formspree) + map + office
+contact.html            Contact form (plain HTML5, posts to /api/contact) + map + office
+thank-you.html          Inquiry confirmation page (target of /api/contact 303 redirect)
 privacy.html            Privacy Policy (~2,300 words, GDPR + CCPA)
 terms.html              Terms of Service (~2,200 words, CA law)
 legal.html              Legal Information / Imprint (KYB-ready)
@@ -25,7 +26,7 @@ Dockerfile              nginx-alpine static-site image with security headers + C
 .dockerignore           Keeps build context clean
 ```
 
-Each page is fully self-contained: header, footer, and SEO meta tags live inline in the page so that the file can be edited directly. There is one shared stylesheet (`styles.css`). No client-side JavaScript ships with the site — the contact form uses native HTML5 validation and posts directly to Formspree.
+Each page is fully self-contained: header, footer, and SEO meta tags live inline in the page so that the file can be edited directly. There is one shared stylesheet (`styles.css`). No client-side JavaScript ships with the site — the contact form uses native HTML5 validation and POSTs to `/api/contact`, which nginx 303-redirects to `/thank-you.html`. To actually deliver submissions to an inbox, swap the `location = /api/contact` block in `Dockerfile` for a `proxy_pass` to your email-relay service.
 
 ## 2. Preview locally
 
@@ -42,11 +43,10 @@ The site uses Google Fonts from a CDN; an internet connection is required for fi
 
 ## 3. Outstanding items before going live
 
-The real contact identity (`contact@cultivatedtech.space`, `+1 (863) 674-8567`) and the production domain (`cultivatedtech.space`) are already in place across the HTML, sitemap, and robots.txt. The following items remain to be wired before vendor submission:
+The real contact identity (`contact@cultivatedtech.space`, `+1 (863) 674-8567`) and the production domain (`cultivatedtech.space`) are already in place across the HTML, sitemap, and robots.txt. The contact form posts to a first-party endpoint (`/api/contact`) served by nginx, which 303-redirects to `/thank-you.html`. To deliver submissions to a real inbox in the future, replace the `location = /api/contact` block in `Dockerfile` with a `proxy_pass` to your email-relay service (Resend / Postmark / Mailgun / SES). The following optional items remain:
 
 | Where | Item | What to do |
 | --- | --- | --- |
-| `contact.html` | Formspree placeholder | Replace `REPLACE_WITH_REAL_FORM_ID` in the `<form action>` with your real Formspree form ID, or swap to a self-hosted `/api/contact` endpoint. The form will 404 on submit until this is done. |
 | All HTML `<head>` | `og:image` | None of the pages currently declare `og:image`. If you want a social-share preview thumbnail, add a 1200×630 PNG (e.g. `og-image.png`) and a `<meta property="og:image" content="https://cultivatedtech.space/og-image.png" />` to each page. |
 | `Dockerfile` | Base image digest pin | The `nginx:1.27-alpine` tag is currently floating. Once you choose a deployment moment, pin to a specific digest (`nginx:1.27.5-alpine@sha256:...`) for reproducible builds. |
 
@@ -147,7 +147,7 @@ export const metadata: Metadata = {
 
 ### Contact form
 
-The current site ships a plain HTML5 form in `contact.html` posting to Formspree (the old `contact-form.jsx` React component has been removed from the repo). If you later migrate to Next.js, build a new React component from the markup in `contact.html` and wire it to a backend:
+The current site ships a plain HTML5 form in `contact.html` posting to a first-party `/api/contact` endpoint served by nginx (the old `contact-form.jsx` React component has been removed from the repo). If you later migrate to Next.js, build a new React component from the markup in `contact.html` and wire it to a backend:
 
 1. Create `src/app/api/contact/route.ts`:
    ```ts
@@ -217,7 +217,7 @@ When moving to Next.js (only if needed — see §6), replace any `<img>` tags yo
 
 ## 9. Final checks before submitting to KYB
 
-1. `REPLACE_WITH_REAL_FORM_ID` swapped for the real Formspree form ID in `contact.html` (or the form re-wired to your own backend).
+1. (Optional, for real email delivery) Replace the `location = /api/contact` block in `Dockerfile` with a `proxy_pass` to your email-relay service so submissions reach an actual inbox.
 2. `/legal`, `/privacy`, `/terms` are reachable from the footer of **every** page (they are).
 3. The CA SOS verification link on `/legal` resolves and the entity record is found by searching `4701299`.
 4. `Last Updated` date on `/privacy` and `/terms` is current (auto-set to **May 26, 2026** in this build).
