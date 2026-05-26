@@ -6,6 +6,8 @@ COPY index.html about.html services.html process.html contact.html \
      styles.css robots.txt sitemap.xml \
      /usr/share/nginx/html/
 
+COPY assets/ /usr/share/nginx/html/assets/
+
 RUN printf 'server {\n\
   listen 80;\n\
   server_name _;\n\
