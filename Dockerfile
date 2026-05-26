@@ -1,8 +1,9 @@
 FROM nginx:1.27-alpine
 
-COPY . /usr/share/nginx/html/
-
-RUN rm -f /usr/share/nginx/html/Dockerfile /usr/share/nginx/html/.thumbnail
+COPY index.html about.html services.html process.html contact.html \
+     privacy.html terms.html legal.html \
+     styles.css robots.txt sitemap.xml \
+     /usr/share/nginx/html/
 
 RUN printf 'server {\n\
   listen 80;\n\
@@ -17,9 +18,12 @@ RUN printf 'server {\n\
   location = /services{ return 301 /services.html; }\n\
   location = /process { return 301 /process.html; }\n\
   location = /contact { return 301 /contact.html; }\n\
-  add_header X-Content-Type-Options nosniff;\n\
-  add_header X-Frame-Options SAMEORIGIN;\n\
-  add_header Referrer-Policy strict-origin-when-cross-origin;\n\
+  add_header X-Content-Type-Options nosniff always;\n\
+  add_header X-Frame-Options SAMEORIGIN always;\n\
+  add_header Referrer-Policy strict-origin-when-cross-origin always;\n\
+  add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;\n\
+  add_header Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()" always;\n\
+  add_header Content-Security-Policy "default-src '\''self'\''; script-src '\''self'\''; style-src '\''self'\'' '\''unsafe-inline'\'' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://www.openstreetmap.org; img-src '\''self'\'' data:; connect-src '\''self'\'' https://formspree.io; form-action '\''self'\'' https://formspree.io; base-uri '\''self'\''; object-src '\''none'\''; frame-ancestors '\''self'\''" always;\n\
 }\n' > /etc/nginx/conf.d/default.conf
 
 EXPOSE 80

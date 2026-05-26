@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cultivatedtech.example/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://cultivatedtech.example/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://cultivatedtech.example/services</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://cultivatedtech.example/process</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://cultivatedtech.example/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://cultivatedtech.example/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://cultivatedtech.example/terms</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
-  <url><loc>https://cultivatedtech.example/legal</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://cultivatedtech.space/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://cultivatedtech.space/about</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cultivatedtech.space/services</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://cultivatedtech.space/process</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cultivatedtech.space/contact</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://cultivatedtech.space/privacy</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://cultivatedtech.space/terms</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://cultivatedtech.space/legal</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
 </urlset>

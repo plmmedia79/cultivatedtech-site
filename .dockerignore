@@ -1,0 +1,14 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+README.md
+.codex-review
+.codex-*
+.claude
+.idea
+.vscode
+node_modules
+*.jsx
+.DS_Store
+.thumbnail

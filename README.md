@@ -2,7 +2,7 @@
 
 A complete corporate website for **Cultivated Technology Group, Inc.** — a California General Stock Corporation (Entity No. 4701299) headquartered in Fresno, California. The site is designed to serve real prospects and to satisfy Know-Your-Business (KYB) review by financial-services providers such as Sumsub.
 
-This repository contains the **canonical design + final copy** for the site as a static, multi-page HTML build (no toolchain required to preview). The companion `next-app/` notes below describe the one-to-one mapping into a Next.js 14 + TypeScript + Tailwind + shadcn/ui project for production deployment.
+This repository contains the **canonical design + final copy** for the site as a static, multi-page HTML build (no toolchain required to preview, no JavaScript framework, no build step). The site is shipped via the included `Dockerfile` (nginx). A Next.js 14 migration path is sketched at the bottom of this document, but it is intentionally **not** the recommended deployment for the KYB use case — the static build is what gets shipped.
 
 ---
 
@@ -13,18 +13,19 @@ index.html              Home
 about.html              About the firm + leadership (John Edward Paul)
 services.html           Six service practices, full write-ups
 process.html            Engagement methodology + onboarding / IP / security
-contact.html            Contact form (React, client-side) + map + office
+contact.html            Contact form (plain HTML5, posts to Formspree) + map + office
 privacy.html            Privacy Policy (~2,300 words, GDPR + CCPA)
 terms.html              Terms of Service (~2,200 words, CA law)
 legal.html              Legal Information / Imprint (KYB-ready)
 
 styles.css              Site-wide design system
-contact-form.jsx        React contact form (Babel-compiled in-browser)
 sitemap.xml             Sitemap for the live domain
 robots.txt              Robots
+Dockerfile              nginx-alpine static-site image with security headers + CSP
+.dockerignore           Keeps build context clean
 ```
 
-Each page is fully self-contained: header, footer, and SEO meta tags live inline in the page so that the file can be edited directly. There is one shared stylesheet (`styles.css`) and one shared script (`contact-form.jsx`) used only on the Contact page.
+Each page is fully self-contained: header, footer, and SEO meta tags live inline in the page so that the file can be edited directly. There is one shared stylesheet (`styles.css`). No client-side JavaScript ships with the site — the contact form uses native HTML5 validation and posts directly to Formspree.
 
 ## 2. Preview locally
 
@@ -35,24 +36,19 @@ python3 -m http.server 8000
 # then visit http://localhost:8000/
 ```
 
-The site uses Google Fonts and React/Babel from a CDN; an internet connection is required for first paint.
+The site uses Google Fonts from a CDN; an internet connection is required for first paint.
 
 ---
 
-## 3. Replace these placeholders before going live
+## 3. Outstanding items before going live
 
-Search-and-replace across the project:
+The real contact identity (`contact@cultivatedtech.space`, `+1 (863) 674-8567`) and the production domain (`cultivatedtech.space`) are already in place across the HTML, sitemap, and robots.txt. The following items remain to be wired before vendor submission:
 
-| Placeholder shown on the site | Replace with |
-| --- | --- |
-| `info@cultivatedtech.example`    | The real general contact email (e.g. `info@yourdomain.com`) |
-| `privacy@cultivatedtech.example` | Real privacy/data-protection contact email |
-| `legal@cultivatedtech.example`   | Real legal/compliance contact email |
-| `+1 (559) 000-0000`              | Real office telephone number |
-| `cultivatedtech.example`         | Production domain (also update `<meta property="og:*">` and `sitemap.xml`) |
-| `https://cultivatedtech.example/sitemap.xml` | Real sitemap URL in `robots.txt` |
-
-The placeholder email domain `cultivatedtech.example` uses the IANA-reserved `.example` TLD on purpose so that nothing in the demo can accidentally appear to be a real, registered email address.
+| Where | Item | What to do |
+| --- | --- | --- |
+| `contact.html` | Formspree placeholder | Replace `REPLACE_WITH_REAL_FORM_ID` in the `<form action>` with your real Formspree form ID, or swap to a self-hosted `/api/contact` endpoint. The form will 404 on submit until this is done. |
+| All HTML `<head>` | `og:image` | None of the pages currently declare `og:image`. If you want a social-share preview thumbnail, add a 1200×630 PNG (e.g. `og-image.png`) and a `<meta property="og:image" content="https://cultivatedtech.space/og-image.png" />` to each page. |
+| `Dockerfile` | Base image digest pin | The `nginx:1.27-alpine` tag is currently floating. Once you choose a deployment moment, pin to a specific digest (`nginx:1.27.5-alpine@sha256:...`) for reproducible builds. |
 
 ### Content that is real and should NOT be changed
 
@@ -97,9 +93,11 @@ The three pages most commonly checked by KYB reviewers are fully written, not st
 
 ---
 
-## 6. Migration to Next.js 14 (production build)
+## 6. Next.js migration — possible, not recommended for KYB
 
-The static build maps one-to-one to a Next.js 14 App Router project. Recommended setup:
+The static HTML build is what gets shipped for the Sumsub / KYB vendor application. A Next.js port adds a build pipeline, a dependency tree, a Node runtime, and a CSP surface — none of which solve a problem the static site currently has. Migrate to Next.js only if you later need: a CMS, authenticated routes, server-side API routes co-located with the site, or dynamic content beyond the contact form.
+
+The sketch below is kept for reference if that future arrives. Setup:
 
 ```bash
 npx create-next-app@14 ctg-site \
@@ -119,7 +117,7 @@ src/app/
   about/page.tsx
   services/page.tsx
   process/page.tsx
-  contact/page.tsx        # uses "use client" + the React form
+  contact/page.tsx        # uses "use client" + a new React form built from the current HTML
   privacy/page.tsx
   terms/page.tsx
   legal/page.tsx
@@ -132,7 +130,7 @@ src/components/
   site-footer.tsx
   hero.tsx
   cta-band.tsx
-  contact-form.tsx        # convert from contact-form.jsx
+  contact-form.tsx        # new React component, built from the markup in contact.html
 ```
 
 ### Per-page metadata
@@ -149,7 +147,7 @@ export const metadata: Metadata = {
 
 ### Contact form
 
-The `contact-form.jsx` component is already structured as a real React component with validation. To wire it to a backend:
+The current site ships a plain HTML5 form in `contact.html` posting to Formspree (the old `contact-form.jsx` React component has been removed from the repo). If you later migrate to Next.js, build a new React component from the markup in `contact.html` and wire it to a backend:
 
 1. Create `src/app/api/contact/route.ts`:
    ```ts
@@ -159,7 +157,7 @@ The `contact-form.jsx` component is already structured as a real React component
      return Response.json({ ok: true });
    }
    ```
-2. In the form component, replace the `submitContact` placeholder body with:
+2. Build a client component that mirrors the HTML form's fields and validation, and submit via:
    ```ts
    const r = await fetch("/api/contact", {
      method: "POST",
@@ -207,23 +205,24 @@ For environment variables required by the contact-form backend (e.g. `RESEND_API
 
 The static HTML build is structured to score 90+ on every Lighthouse category out of the box:
 
-- One stylesheet, no render-blocking scripts (only the contact page loads React, and only there)
+- One stylesheet, **zero render-blocking scripts** across the entire site (no JS ships)
 - Semantic HTML, headings in order, proper landmarks
 - All images use `loading="lazy"` where present (the map iframe is the only embed)
 - Color contrast verified against the design tokens in `styles.css`
 - Font subsets fetched from Google Fonts with `display=swap`
 
-When moving to Next.js, replace any `<img>` tags you add with `next/image`, and the contact-form script will be code-split per route automatically.
+When moving to Next.js (only if needed — see §6), replace any `<img>` tags you add with `next/image`.
 
 ---
 
 ## 9. Final checks before submitting to KYB
 
-1. All `[REPLACE_WITH_REAL_*]` placeholders replaced.
+1. `REPLACE_WITH_REAL_FORM_ID` swapped for the real Formspree form ID in `contact.html` (or the form re-wired to your own backend).
 2. `/legal`, `/privacy`, `/terms` are reachable from the footer of **every** page (they are).
-3. Production domain matches the email addresses used on those pages.
-4. The CA SOS verification link on `/legal` resolves and the entity record is found by searching `4701299`.
-5. `Last Updated` date on `/privacy` and `/terms` is current (auto-set to **May 26, 2026** in this build).
+3. The CA SOS verification link on `/legal` resolves and the entity record is found by searching `4701299`.
+4. `Last Updated` date on `/privacy` and `/terms` is current (auto-set to **May 26, 2026** in this build).
+5. Optional: `og-image.png` added and referenced in each page's `<head>`.
+6. Optional: nginx base image pinned by digest in `Dockerfile`.
 
 ---
 

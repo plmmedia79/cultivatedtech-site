@@ -193,7 +193,24 @@ section.tight { padding: clamp(40px, 5vw, 72px) 0; }
 }
 
 @media (max-width: 900px) {
-  .nav { display: none; }
+  .site-header .wrap {
+    flex-wrap: wrap;
+    row-gap: 8px;
+    height: auto;
+    min-height: 68px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .nav {
+    order: 3;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 2px 6px;
+    padding-top: 10px;
+    border-top: 1px solid var(--rule);
+    justify-content: flex-start;
+  }
+  .nav a { padding: 6px 10px; font-size: 13px; }
   .nav-cta { display: inline-flex; }
 }
 

@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,360;6..72,400;6..72,440;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<meta property="og:url" content="https://cultivatedtech.space/contact.html" />
+<link rel="canonical" href="https://cultivatedtech.space/contact.html" />
 </head>
 <body data-screen-label="Contact">
 
@@ -44,7 +46,63 @@
           <strong>A note on onboarding.</strong> We work primarily with established businesses. New clients complete a brief verification step as part of our standard onboarding — typically a single document upload and a short questionnaire, completed in parallel with discovery so it does not delay kickoff.
         </div>
 
-        <div id="contact-form-root"></div>
+        <!-- TODO before launch: replace Formspree form ID with the real endpoint, or swap to your own /api/contact handler. -->
+        <form action="https://formspree.io/f/REPLACE_WITH_REAL_FORM_ID" method="POST" class="contact-form">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="fullName">Full Name<span class="req">*</span></label>
+              <input id="fullName" name="fullName" type="text" autocomplete="name" required minlength="2" aria-describedby="fullName-hint" />
+              <span id="fullName-hint" class="err" hidden>Please provide your full name.</span>
+            </div>
+            <div class="form-field">
+              <label for="email">Business Email<span class="req">*</span></label>
+              <input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-hint" />
+              <span id="email-hint" class="err" hidden>Please provide a valid business email address.</span>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label for="company">Company Name<span class="req">*</span></label>
+              <input id="company" name="company" type="text" autocomplete="organization" required aria-describedby="company-hint" />
+              <span id="company-hint" class="err" hidden>Please provide your company name.</span>
+            </div>
+            <div class="form-field">
+              <label for="country">Country<span class="req">*</span></label>
+              <select id="country" name="country" required aria-describedby="country-hint">
+                <option value="United States">United States</option>
+                <option value="Canada">Canada</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Australia">Australia</option>
+                <option value="Germany">Germany</option>
+                <option value="France">France</option>
+                <option value="Netherlands">Netherlands</option>
+                <option value="Ireland">Ireland</option>
+                <option value="Mexico">Mexico</option>
+                <option value="Japan">Japan</option>
+                <option value="Singapore">Singapore</option>
+                <option value="United Arab Emirates">United Arab Emirates</option>
+                <option value="Other">Other</option>
+              </select>
+              <span id="country-hint" class="err" hidden>Please select your country.</span>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="description">Project Description<span class="req">*</span></label>
+            <textarea id="description" name="description" rows="6" required minlength="20"
+              placeholder="A few sentences on what you're trying to build, the constraints, and your timeline."
+              aria-describedby="description-hint"></textarea>
+            <span id="description-hint" class="err" hidden>Please describe the project (at least a couple of sentences).</span>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:8px; flex-wrap:wrap;">
+            <p style="font-size:12.5px; color:var(--ink-3); margin:0; max-width:44ch; line-height:1.5;">
+              By submitting this form you agree to our <a href="privacy.html" style="text-decoration:underline; color:var(--ink-2);">Privacy Policy</a>. We use the information you provide solely to respond to your inquiry.
+            </p>
+            <button type="submit" class="btn btn-primary">Send Inquiry <span class="arrow">→</span></button>
+          </div>
+        </form>
       </div>
 
       <aside class="contact-aside">
@@ -123,11 +181,6 @@
     </div>
   </div>
 </footer>
-
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-<script type="text/babel" src="contact-form.jsx"></script>
 
 </body>
 </html>
