@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Our Process — Cultivated Technology Group</title>
+<meta name="description" content="The engagement methodology used by Cultivated Technology Group: discovery, architecture, iterative build, QA, deployment, and ongoing support. Includes client onboarding, scope changes, IP ownership, and confidentiality practices." />
+<meta property="og:title" content="Our Process — Cultivated Technology Group" />
+<meta property="og:description" content="A written engagement methodology — discovery, architecture, build, QA, deployment, support." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,360;6..72,400;6..72,440;6..72,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body data-screen-label="Process">
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">C<span style="opacity:.55">/</span>T</span><span class="brand-name">Cultivated Technology Group<small>Est. 2021 · Fresno, CA</small></span></a>
+    <nav class="nav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="process.html" class="active">Process</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="btn btn-primary btn-sm nav-cta" href="contact.html">Get in Touch <span class="arrow">→</span></a>
+  </div>
+</header>
+
+<section class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Our Process</span>
+    <h1 class="display">How an engagement actually<br />runs at this firm.</h1>
+    <p class="lead">We publish our methodology rather than abbreviate it. The six steps below describe what happens between the first call and the day we hand the system over. If we propose to do anything materially different, we'll say so in writing before kickoff.</p>
+  </div>
+</section>
+
+<!-- ─────────────── STEPS ─────────────── -->
+<section style="padding-top:0;">
+  <div class="wrap">
+    <div class="process-steps">
+
+      <div class="process-step">
+        <div class="ps-num">01</div>
+        <div>
+          <h3>Discovery &amp; Requirements</h3>
+          <div class="ps-time">1 – 2 weeks · written brief</div>
+          <p>Every engagement begins with discovery. We interview the people who will use, build, or pay for the system, map the current state, and identify the constraints that are easy to miss in a sales conversation — regulatory, organizational, integration, and timing.</p>
+        </div>
+        <div>
+          <ul>
+            <li>Stakeholder interviews (typically 4 – 8 people)</li>
+            <li>System and data-flow mapping of the current state</li>
+            <li>Constraint inventory: regulatory, integration, organizational</li>
+            <li>Risk register, ranked by likelihood and impact</li>
+            <li>Written brief (15 – 40 pages) signed off before any code</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="ps-num">02</div>
+        <div>
+          <h3>Architecture &amp; Planning</h3>
+          <div class="ps-time">1 – 3 weeks · written plan</div>
+          <p>With the brief approved, we produce an architecture document and a delivery plan. Architecture decisions are made explicitly and trade-offs are written down. The delivery plan sequences work into vertical slices we can demo end-to-end, so progress is observable from week three onward.</p>
+        </div>
+        <div>
+          <ul>
+            <li>System architecture document with trade-offs named</li>
+            <li>Data model, API surface, and integration contracts</li>
+            <li>Security model: authn, authz, secrets, data classification</li>
+            <li>Delivery plan, milestone schedule, and review cadence</li>
+            <li>Cost-and-effort estimate with confidence intervals</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="ps-num">03</div>
+        <div>
+          <h3>Iterative Development</h3>
+          <div class="ps-time">Ongoing · weekly demos</div>
+          <p>We build in one-week iterations. Each Friday includes a live demo of working software in a staging environment, a written status report covering progress, risks, and decisions needed, and an updated backlog you can read in five minutes. The shared backlog is editable by the client; nothing about the project is hidden from you.</p>
+        </div>
+        <div>
+          <ul>
+            <li>Weekly Friday demos in a real staging environment</li>
+            <li>Written status reports — progress, risks, decisions needed</li>
+            <li>Shared, editable backlog with effort estimates</li>
+            <li>Pull-request review process with documented standards</li>
+            <li>Continuous integration: tests, lint, type checks, security scans</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="ps-num">04</div>
+        <div>
+          <h3>QA, Security Review &amp; Documentation</h3>
+          <div class="ps-time">2 – 4 weeks · pre-launch</div>
+          <p>Before any system goes to production we run a structured QA pass, a security review, and a documentation sweep. None of these are afterthoughts — they have dedicated time in the schedule and dedicated deliverables you can audit.</p>
+        </div>
+        <div>
+          <ul>
+            <li>Functional and regression QA against the original brief</li>
+            <li>Performance and load testing where appropriate</li>
+            <li>Internal security review: authn, authz, data exposure, dependencies</li>
+            <li>Operational documentation: runbooks, on-call notes, recovery procedures</li>
+            <li>Developer documentation: architecture, conventions, onboarding</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="ps-num">05</div>
+        <div>
+          <h3>Deployment &amp; Handoff</h3>
+          <div class="ps-time">1 – 2 weeks · cutover</div>
+          <p>Production deployment is a sequenced event, not a button-press. We deploy to a controlled environment, run validation against real data where possible, and cut over with a rollback path that's been tested. Handoff includes credentials, source control, infrastructure access, and a working session with whoever will own the system on your side.</p>
+        </div>
+        <div>
+          <ul>
+            <li>Production deployment with documented rollback plan</li>
+            <li>Validation against production data or staged equivalents</li>
+            <li>Transfer of source code, secrets, and infrastructure access</li>
+            <li>Live handoff session with your engineering / ops team</li>
+            <li>Post-deployment monitoring window (typically 2 – 4 weeks)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div class="ps-num">06</div>
+        <div>
+          <h3>Ongoing Support &amp; Partnership</h3>
+          <div class="ps-time">Optional · monthly retainer</div>
+          <p>After handoff, clients may elect to retain us for continued support, feature work, or scheduled architecture reviews. Retainers are sized to the actual operating reality of the system. We will not sell you a retainer larger than you need.</p>
+        </div>
+        <div>
+          <ul>
+            <li>Monthly retainer for bug fixes, security patching, and dependency updates</li>
+            <li>Quarterly architecture and cost reviews</li>
+            <li>On-call support tier for production incidents (where engaged)</li>
+            <li>Feature work billed against an agreed budget</li>
+            <li>Clean exit at any month, with full documentation maintained</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────── HOW WE WORK — DEEPER ─────────────── -->
+<section style="background: var(--bg-2); border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);">
+  <div class="wrap">
+    <div class="section-head" style="border-bottom-color: var(--rule-2);">
+      <div class="col-meta"><span class="eyebrow">Engagement Mechanics</span></div>
+      <div>
+        <h2>The operational parts of working with us.</h2>
+        <p class="lead">These are the things that aren't on a project timeline but make the difference between a clean engagement and a painful one. We document them in advance.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:1px; background: var(--rule-2); border:1px solid var(--rule-2);">
+
+      <div style="background: var(--bg-2); padding:36px;">
+        <h3 style="font-size:22px; margin-bottom:12px;">Client Onboarding &amp; Verification</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin-bottom:14px;">New business clients complete a brief onboarding process before kickoff. This includes a Know-Your-Business (KYB) verification step in line with the firm's compliance posture: confirmation of the client's legal entity, business address, and an authorized signatory.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin:0;">The verification is light-touch — typically a single document upload and a short questionnaire — and is completed in parallel with the discovery phase so it does not delay project start. We use the same standard for every new client.</p>
+      </div>
+
+      <div style="background: var(--bg-2); padding:36px;">
+        <h3 style="font-size:22px; margin-bottom:12px;">Scope Changes &amp; Change Orders</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin-bottom:14px;">Scope will change. We treat that as normal. The mechanism is a written change order: a one-page document that names the requested change, the effort impact, the schedule impact, and the cost impact. Nothing material moves without one.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin:0;">Small course corrections inside the backlog do not require paperwork. The threshold for a formal change order is documented in the engagement letter so there is no ambiguity about when one applies.</p>
+      </div>
+
+      <div style="background: var(--bg-2); padding:36px;">
+        <h3 style="font-size:22px; margin-bottom:12px;">Code Ownership &amp; IP Transfer</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin-bottom:14px;">All work product — source code, infrastructure definitions, documentation, and design artifacts — transfers to the client on payment. There are no licensing strings, no proprietary "platform" you have to keep paying for, no source-code escrow theatre.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin:0;">The firm retains the right to describe the engagement in general terms (industry, scope, technologies used) for portfolio purposes, only with explicit client consent. Anything more specific requires written approval.</p>
+      </div>
+
+      <div style="background: var(--bg-2); padding:36px;">
+        <h3 style="font-size:22px; margin-bottom:12px;">Security &amp; Confidentiality</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin-bottom:14px;">A mutual NDA is part of every engagement. Internally we apply least-privilege access to client environments, use hardware-backed credentials, and rotate secrets on a schedule. Client data is never used to train or evaluate third-party services without explicit consent.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:var(--ink-3); margin:0;">For regulated work — healthcare, financial services, government — we are willing to sign sector-specific agreements (HIPAA BAAs, etc.) where the work justifies it, and to staff the engagement accordingly.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="cta-band-grid">
+      <div>
+        <span class="eyebrow">Ready to Begin</span>
+        <h2 style="margin-top:16px; font-size:clamp(32px, 4vw, 52px);">A short call, then a written brief.</h2>
+        <p style="max-width:60ch; margin-top:16px;">That's how every engagement begins. The discovery phase is fixed-fee and small enough that we can find out together whether we're the right firm for the work.</p>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-primary" href="contact.html">Schedule a Consultation <span class="arrow">→</span></a>
+        <a class="btn btn-secondary" href="services.html">Browse Services</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-col footer-legal-block">
+        <strong>Cultivated Technology Group, Inc.</strong><br />
+        A California General Stock Corporation<br />
+        Entity No. 4701299<br />
+        401 W Fallbrook, Suite 205<br />
+        Fresno, CA 93711, United States<br /><br />
+        <a href="mailto:contact@cultivatedtech.space">contact@cultivatedtech.space</a><br />
+        +1 (863) 674-8567
+      </div>
+      <div class="footer-col">
+        <h5>Firm</h5>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="process.html">Our Process</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Legal</h5>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="legal.html">Legal Information</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Elsewhere</h5>
+        <ul>
+          <li><a href="#" rel="noopener">LinkedIn</a></li>
+          <li><a href="https://bizfileonline.sos.ca.gov/search/business" target="_blank" rel="noopener">CA SOS Entity Search</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 CULTIVATED TECHNOLOGY GROUP, INC. — ALL RIGHTS RESERVED.</span>
+      <div class="links">
+        <a href="privacy.html">PRIVACY</a>
+        <a href="terms.html">TERMS</a>
+        <a href="legal.html">LEGAL</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
